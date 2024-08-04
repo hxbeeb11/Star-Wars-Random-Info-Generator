@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Info Generator</title>
+
+    <style>
+        body{
+            background-image: url('cloud city.jpeg');
+            background-size: cover;
+        }
+
+        #box{
+            display: block;
+            height: 300px;
+            width: 400px;
+            border: 5px solid red;
+            border-radius: 30px;
+            margin: 200px auto;
+            background-color: rgba(171, 171, 171, 0.7);
+        }
+
+        #content{
+            padding: 50px 50px 50px 50px;
+        }
+
+        #name{
+            display: inline;
+        }
+
+        #birthyear{
+            display: inline;
+        }
+
+        #eyecolor{
+            display: inline;
+        }
+
+        .Randomize{
+            margin-top: 50px;
+            background-color: aliceblue;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="box">
+        <br>
+        <center><strong>Generate Info About Random Star Wars Charecters!!!</strong></center>
+        <div id="content">
+        <strong>Name: </strong>
+        <div id="name">...</div>
+
+        <br>
+        <br>
+        <br>
+
+        <strong>Birth Year: </strong>
+        <div id="birthyear">...</div>
+
+        <br>
+        <br>
+        <br>
+
+        <strong>Eye Color: </strong>
+        <div id="eyecolor">...</div>
+
+
+        <center><button class="Randomize">Randomize</button></center>
+    </div>
+
+
+
+    </div>
+
+    <script>
+
+        const name = document.getElementById("name");
+        const birthyear=document.getElementById("birthyear");
+        const eyecolor=document.getElementById("eyecolor");
+
+        const button = document.querySelector(".Randomize");
+
+        button.addEventListener('click',(e) => {
+            e.preventDefault();
+
+            name.innerHTML = '<i>Loading...</i>'
+            birthyear.innerHTML = '<i>Loading...</i>'
+            eyecolor.innerHTML = '<i>Loading...</i>'
+
+            let randomNum = Math.ceil(Math.random() * 83);
+            
+            fetch(`https://swapi.dev/api/people/${randomNum}/`)
+                .then(response=>response.json())
+                .then(Charecter => {
+                    name.innerHTML = Charecter['name']
+                    birthyear.innerHTML = Charecter['birth_year']
+                    eyecolor.innerHTML = Charecter['eye_color']
+             })
+        })
+
+        
+    </script>
+</body>
+</html>
